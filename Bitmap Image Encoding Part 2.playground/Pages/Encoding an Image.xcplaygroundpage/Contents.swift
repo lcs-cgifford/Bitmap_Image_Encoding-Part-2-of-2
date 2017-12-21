@@ -17,12 +17,29 @@ import PlaygroundSupport
  */
 // Write the encoding for your image here
 let encodedBitmap = """
-1,3,1
-4,1
-1,4
-0,1,3,1
-0,1,3,1
-1,4
+w7,R5,w2,P3,w3
+w6,R9,P2,w3
+w6,b3,P2,Bl1,P1,w1,R3,w3
+w5,b1,P1,b1,P3,bl1,P3,R2,w3
+w5,b1,P1,b2,P3,R1,P3,b1,w3
+w5,b2,P4,bl4,R1,w4
+w7,P7,R2,w4
+w1,P3,R4,B1,R3,B1,R2,w2,b1,w2
+w1,P3,R5,B1,R3,B1,w2,b2,w2
+w2,P1,w3,R3,B4,Y1,B2,b2,w2
+w7,B3,Y1,B5,b2,w2
+w5,b2,B9,b2,w2
+w4,b3,B6,w7
+w4,b2,w9,w5
+w4,b3,B6,w7
+w4,b2,w9,w5
+w9,bl8,w3
+w9,bl1,G6,bl1,w3
+w9,bl1,bl6,w4
+w9,w1,G1,bl1,w3
+w9,w1,bl1,G4,bl1,w4
+w9,w1,bl1,G4,bl1,w4
+w9,w1,bl1,G4,bl1,w4
 """
 
 /*:

@@ -3,29 +3,31 @@
 //: The following two statements are required to make the playground run. Please do not remove.
 import Cocoa
 import PlaygroundSupport
-/*:
- ## Decoding the text
- Now we will (at last!) decode the image.
- 
- Recall, our rules are:
- 
- * If a line starts with a 0, the first pixel is black.
- * If a line does not start with a 0, the first pixel is white.
- * When a comma is encountered, a new number begins, and the colour switches.
- * When a newline character is encountered, go to a new row in the image.
- * Once we have a new number, we draw that many pixels in the current colour.
- 
- First, copy and paste your encoded image string to this page.
-*/
 
 // Copy your encoded image string here...
 let encodedBitmap = """
-1,3,1
-4,1
-1,4
-0,1,3,1
-0,1,3,1
-1,4
+w7,R5,w2,P3,w3
+w6,R9,P2,w3
+w6,Q3,P2,Q1,P1,w1,R3,w3
+w5,Q1,P1,Q1,P3,Q1,P3,R2,w3
+w5,Q1,P1,Q2,P3,Q1,P3,R1,w3
+w5,Q2,P4,Q4,R1,w4
+w7,P7,R2,w4
+w1,P3,R4,B1,R3,B1,R2,w2,Q1,w2
+w1,P3,R5,B1,R3,B1,w2,Q2,w2
+w2,P1,w3,R3,B4,Y1,B2,Q2,w2
+w7,B3,Y1,B5,Q2,w2
+w5,Q2,B9,Q2,w2
+w4,Q3,B6,w7
+w4,Q3,B6,w5
+w4,Q3,B6,w7
+w4,Q2,w9,w5
+w9,Q8,w3
+w9,Q1,G6,Q1,w3
+w9,Q1,Q7,w4
+w9,w1,Q1,G4,Q1,w3
+w9,w1,Q1,G4,Q1,w4
+w9,w1,Q1,G4,Q1,w4
 """
 
 // Make a canvas
@@ -53,29 +55,44 @@ var drawThisManyPixels = 0
 // Iterate over each character in the encoded bitmap string
 for character in encodedBitmap {
     
+    // Print out the current character
+    print("current character is: \(character)")
+    
     // Set colour at start of a line
-    if character == "0" {
+    if character == "w" {
         
-        canvas.fillColor = Color.black
-        currentColor = "black"
-
+        canvas.fillColor = Color.white
+        currentColor = "white"
+        
     } else if character == "," {
         
         // We have a new number
         // Are we past the first pixel in a row?
         if x > 0 {
-
+            
             // Toggle the pixel colour
-            if currentColor == "black" {
+            if currentColor == "white" {
                 currentColor = "white"
-                canvas.fillColor = Color.white
+                canvas.fillColor = Color.red
             } else {
                 currentColor = "black"
                 canvas.fillColor = Color.black
             }
-
+            
         }
         
+    } else if character  == "R" {
+        canvas.fillColor = Color.red
+    } else if character == "P" {
+        canvas.fillColor = Color.init(hue: 10, saturation: 50, brightness: 100, alpha: 100)
+    }else if character == "Q" {
+        canvas.fillColor = Color.black
+    } else if character == "G" {
+        canvas.fillColor = Color.green
+    }else if character == "B" {
+        canvas.fillColor = Color.blue
+    }else if character == "Y" {
+        canvas.fillColor = Color.yellow
     } else if character == "\n" {
         
         // We are on a new line, so reduce the vertical position
@@ -94,15 +111,15 @@ for character in encodedBitmap {
         
         // Draw the pixels
         for _ in 1...drawThisManyPixels {
-
+            
             // Draw the enlarged "pixel"
             canvas.drawRectangle(bottomLeftX: x, bottomLeftY: y, width: cellSize, height: cellSize)
             
             // Increase x so that the next pixel is drawn to the right of this one
             x += cellSize
-
+            
         }
-
+        
     }
     
 }
